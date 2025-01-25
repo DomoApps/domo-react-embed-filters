@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "12685e0f-0b6b-4bc3-8a66-adf8a1bcca7e",
+      "username": "admin",
+      "email": "admin_user@example.com",
+      "mappingValue": "demo,test",
+      "dashboards": [],
+      "password": "$2a$10$H.ZvlAViJoV2p1jCWKivyOVyoRPhc4NjxFXCMgvpANeLseKpNOfjm"
+    }
+  ]
+}
