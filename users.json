@@ -6,7 +6,8 @@
       "email": "admin_user@example.com",
       "mappingValue": "demo,test",
       "dashboards": [],
-      "password": "$2a$10$H.ZvlAViJoV2p1jCWKivyOVyoRPhc4NjxFXCMgvpANeLseKpNOfjm"
+      "password": "$2a$10$H.ZvlAViJoV2p1jCWKivyOVyoRPhc4NjxFXCMgvpANeLseKpNOfjm",
+      "lastLogin": "2025-06-23T17:44:09.795Z"
     }
   ]
 }

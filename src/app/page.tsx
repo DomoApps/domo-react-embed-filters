@@ -21,7 +21,7 @@ export default function Login() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:3003/api/dashboards', {
+        const response = await fetch('/api/dashboards', {
           credentials: 'include', // Include cookies in the request
         })
 
@@ -48,7 +48,7 @@ export default function Login() {
     }
     try {
       // Make a POST request to the login API
-      const response = await fetch(`http://localhost:3003/login`, {
+      const response = await fetch('/api/login', {
         method: 'POST', // HTTP method
         headers: {
           'Content-Type': 'application/json', // Set the content type to JSON

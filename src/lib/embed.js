@@ -1,7 +1,7 @@
 import jws from 'jws'
 import axios from 'axios'
-import db from './db/db.js'
-import { ACCESS_TOKEN_URL, EMBED_TOKEN_URL, EMBED_URL } from './constants.js' // Import necessary constants
+import db from './db/db'
+import { ACCESS_TOKEN_URL, EMBED_TOKEN_URL, EMBED_URL } from './constants' // Import necessary constants
 
 // Token cache at module level
 let tokenCache = {

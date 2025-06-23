@@ -31,7 +31,9 @@
     "uuid": "^11.0.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/jquery": "^3.5.32",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.14",
     "@types/node": "^22",
     "@types/react": "^19",
