@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useDomoClient } from '@/lib/domoClient'
 
 // Props interface for the EmbedDashboard component
 interface EmbedDashboardProps {
@@ -6,6 +7,9 @@ interface EmbedDashboardProps {
 }
 
 const EmbedDashboard: React.FC<EmbedDashboardProps> = ({ embedID }) => {
+  // Initialize Domo Client listeners
+  useDomoClient()
+
   // State variables to manage embed URL, token, and potential errors
   const [embedURL, setEmbedURL] = useState<string | null>(null) // URL for embedding the dashboard
   const [embedToken, setEmbedToken] = useState<string | null>(null) // Authentication token for embedding
@@ -115,6 +119,7 @@ const EmbedDashboard: React.FC<EmbedDashboardProps> = ({ embedID }) => {
       style={{ width: '100%', height: '100%' }} // Ensure full-width and full-height
     >
       <iframe
+        id={`iframe${embedID}`} // Add ID for Domo client interaction
         ref={iframeRef} // Assign the iframe reference
         key={embedID} // Change key when embedID changes to force a re-render
         src={embedID === 'edit' ? embedURL : undefined} // Only set src for edit mode
