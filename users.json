@@ -5,9 +5,15 @@
       "username": "admin",
       "email": "admin_user@example.com",
       "mappingValue": "demo",
-      "dashboards": [],
-      "password": "$2a$10$H.ZvlAViJoV2p1jCWKivyOVyoRPhc4NjxFXCMgvpANeLseKpNOfjm",
-      "lastLogin": "2025-06-23T17:44:09.795Z"
+      "dashboards": [
+        {
+          "embedID": "RPxzq",
+          "name": "Workforce Health",
+          "filter": []
+        }
+      ],
+      "password": "$2a$10$SWAzsBdN7i3G9LCxxvPIIeSUkfuiC88KlLxbTIHOfSLPcgK9LWyQ2",
+      "lastLogin": "2026-03-18T04:42:37.631Z"
     }
   ]
 }

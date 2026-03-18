@@ -50,7 +50,7 @@ const Parent: React.FC = () => {
   }, []) // Empty dependency array ensures this runs only once
 
   return (
-    <div className="bg-white flex h-dvh p-2">
+    <div className="bg-[#F4F4F4] flex h-dvh p-2">
       {/* Render the Sidebar component, passing necessary props */}
       <Sidebar
         dashboards={dashboards} // Pass the dashboards

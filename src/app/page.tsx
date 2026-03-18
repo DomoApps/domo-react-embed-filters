@@ -1,32 +1,25 @@
-// Enable React's client-side rendering
 'use client'
 
-// Import necessary dependencies
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation' // Next.js router for navigation
-import '../app/globals.css' // Import global styles
+import { useRouter } from 'next/navigation'
+import '../app/globals.css'
 
-// Main Home component
 export default function Login() {
-  // State variables for storing user input and error messages
-  const [username, setUsername] = useState('') // Stores the entered username
-  const [password, setPassword] = useState('') // Stores the entered password
-  const [error, setError] = useState('') // Stores error messages, if any
-  const [isLoading, setIsLoading] = useState(false) //creates feedback on form submit
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  // Initialize the Next.js router for navigation
   const router = useRouter()
 
-  // Check for existing token cookie on component mount
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const response = await fetch('/api/dashboards', {
-          credentials: 'include', // Include cookies in the request
+          credentials: 'include',
         })
 
         if (response.ok) {
-          // If we can access the dashboards endpoint, we're authenticated
           router.push('/home')
         }
       } catch (error) {
@@ -37,9 +30,8 @@ export default function Login() {
     checkAuth()
   }, [router])
 
-  // Handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault() // Prevent the default form submission behavior
+    event.preventDefault()
     setIsLoading(true)
     if (!username || !password) {
       setError('Both fields are required.')
@@ -47,99 +39,152 @@ export default function Login() {
       return
     }
     try {
-      // Make a POST request to the login API
       const response = await fetch('/api/login', {
-        method: 'POST', // HTTP method
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Set the content type to JSON
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }), // Send username and password in the request body
-        credentials: 'include', // Include cookies in the request for authentication
+        body: JSON.stringify({ username, password }),
+        credentials: 'include',
       })
 
-      // Parse the response JSON
       const data = await response.json()
 
       if (response.ok) {
-        // If the response is successful, log the success message
         console.log('Login successful:', data)
-
-        // Navigate to the '/home' route
         router.push('/home')
       } else {
-        // If the response is not successful, display the error message
         setError(data.message)
       }
     } catch (err) {
-      // Handle any errors during the request
       console.error('Error logging in:', err)
-      setError('An error occurred during login.') // Set a generic error message
+      setError('An error occurred during login.')
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Render the login form
   return (
-    <div className="flex bg-[#DCE4EA] flex-col justify-center items-center min-h-screen">
-      {/* Display the company logo */}
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#F4F4F4]">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-10">
+        {/* G&A Partners Logo */}
+        <div className="flex justify-center mb-6">
+          <svg
+            viewBox="0 0 200 50"
+            className="h-12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <text
+              x="0"
+              y="35"
+              fontFamily="Arial, Helvetica, sans-serif"
+              fontSize="30"
+              fontWeight="bold"
+              fill="#C8102E"
+            >
+              G&amp;A
+            </text>
+            <text
+              x="82"
+              y="35"
+              fontFamily="Arial, Helvetica, sans-serif"
+              fontSize="16"
+              fontWeight="normal"
+              fill="#555555"
+            >
+              {' '}
+              Partners
+            </text>
+          </svg>
+        </div>
 
-      <div className="mb-10">
-        <img
-          src={
-            process.env.NEXT_PUBLIC_LOGO_URL ||
-            'https://www.modocorp.co/images/modocorp.png'
-          }
-          alt="Modocorp Logo" // Alt text for accessibility
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="mb-5">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-ga-gray-dark mb-1"
+            >
+              EMAIL
+            </label>
+            <input
+              name="username"
+              autoComplete="off"
+              id="username"
+              type="text"
+              placeholder=""
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="block w-full px-3 py-2.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-ga-red focus:border-transparent text-black"
+            />
+          </div>
+
+          <div className="mb-2">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-ga-gray-dark mb-1"
+            >
+              PASSWORD
+            </label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              placeholder=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="block w-full px-3 py-2.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-ga-red focus:border-transparent text-black"
+            />
+          </div>
+
+          {/* Utility Links */}
+          <div className="flex justify-between mb-6 text-sm">
+            <span className="text-ga-red cursor-pointer hover:underline">
+              Forgot Password?
+            </span>
+            <span className="text-ga-red cursor-pointer hover:underline">
+              Forgot Email/Change Email
+            </span>
+          </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-2.5 bg-ga-red text-white font-semibold rounded hover:bg-ga-red-dark cursor-pointer transition-colors disabled:opacity-60"
+          >
+            {isLoading ? 'Loading...' : 'Next'}
+          </button>
+        </form>
+
+        {/* Bottom Link */}
+        <p className="text-center text-sm text-ga-gray-dark mt-6">
+          Don&apos;t have an account?{' '}
+          <span className="text-ga-red cursor-pointer hover:underline">
+            Create an account
+          </span>
+        </p>
+
+        {/* Language Selector */}
+        <div className="flex justify-center gap-4 mt-4 text-sm">
+          <span className="text-ga-charcoal font-medium cursor-pointer hover:underline">
+            English
+          </span>
+          <span className="text-ga-gray cursor-pointer hover:underline">
+            Espa&ntilde;ol
+          </span>
+        </div>
       </div>
-      {/* Login form */}
-      <form onSubmit={handleSubmit} className="w-96">
-        {/* Username input field */}
-        <div className="mb-6">
-          <label htmlFor="username" className="block text-gray-700 mb-2">
-            Username
-          </label>
 
-          <input
-            name="username"
-            autoComplete="off" // Prevent auto-fill suggestions
-            id="username"
-            type="text" // Input type: text
-            placeholder="Your username" // Placeholder text
-            value={username} // Bind input value to state
-            onChange={(e) => setUsername(e.target.value)} // Update state on input change
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300 text-black"
-          />
-        </div>
-
-        {/* Password input field */}
-        <div className="mb-6">
-          <label htmlFor="password" className="block text-gray-700 mb-2">
-            Password
-          </label>
-          <input
-            name="password"
-            id="password"
-            type="password" // Input type: password (masked characters)
-            placeholder="Your password" // Placeholder text
-            value={password} // Bind input value to state
-            onChange={(e) => setPassword(e.target.value)} // Update state on input change
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300 text-black"
-          />
-        </div>
-
-        {/* Error message display */}
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-
-        {/* Submit button */}
-        <input
-          type="submit" // Input type: submit
-          value={isLoading ? 'Loading...' : 'Login'}
-          className="w-full py-2 bg-[#FF9922] text-white font-semibold rounded-md hover:bg-[#E6891F] cursor-pointer mt-4"
-          disabled={isLoading} // Disable button when loading
-        />
-      </form>
+      {/* Security Note */}
+      <p className="text-xs text-ga-gray mt-6 max-w-md text-center">
+        * For security purposes, do not save your log in information on a shared
+        computer.
+      </p>
     </div>
   )
 }

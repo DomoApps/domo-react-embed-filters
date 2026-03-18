@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --ga-red: #C8102E;
+  --ga-red-dark: #A00E24;
+  --ga-red-light: #E8324D;
+  --ga-charcoal: #333333;
+  --ga-gray-dark: #555555;
+  --ga-gray: #888888;
+  --ga-gray-light: #E5E5E5;
+  --ga-bg: #F4F4F4;
+  --ga-white: #FFFFFF;
+  --background: #F4F4F4;
+  --foreground: #333333;
 }
 
 body {

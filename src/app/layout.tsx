@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Modocorp",
-    description: "Domo Everywhere Demo",
+    title: "G&A Partners - WorkSight",
+    description: "G&A Partners WorkSight Portal",
 };
 
 export default function RootLayout({

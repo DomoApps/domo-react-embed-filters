@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation' // Next.js router for navigation
+import { useRouter } from 'next/navigation'
 
-// Define the structure of a single dashboard object
 interface Dashboard {
-  name: string // The name of the dashboard
-  embedID: string // The unique identifier for embedding the dashboard
+  name: string
+  embedID: string
 }
 
-// Props for the Sidebar component
 interface SidebarProps {
-  dashboards: Dashboard[] // Array of dashboards to display in the sidebar
-  currentEmbedID: string | null // Current embed ID to highlight the active item
-  setCurrentEmbedID: React.Dispatch<React.SetStateAction<string | null>> // Function to update the current embed ID
+  dashboards: Dashboard[]
+  currentEmbedID: string | null
+  setCurrentEmbedID: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -21,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [editVisible, setEditVisible] = useState<boolean>(false)
   const [viewVisible, setViewVisible] = useState<boolean>(false)
-  const [isOpen, setIsOpen] = useState(false) // State to control the visibility of the content
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     if (currentEmbedID === 'edit') {
@@ -31,10 +29,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       setEditVisible(false)
       setViewVisible(true)
     }
-  }, [currentEmbedID]) // React to changes in the currentEmbedID prop
+  }, [currentEmbedID])
 
   const toggleAccordion = () => {
-    setIsOpen((prevState) => !prevState) // Toggle the state on click
+    setIsOpen((prevState) => !prevState)
   }
   const router = useRouter()
 
@@ -43,9 +41,9 @@ const Sidebar: React.FC<SidebarProps> = ({
       const response = await fetch('/api/logout', {
         method: 'POST',
         credentials: 'include',
-      }) // Call the backend logout API
+      })
       if (response.ok) {
-        router.push('/') // Redirect to the login page
+        router.push('/')
       } else {
         console.error('Logout failed')
       }
@@ -54,47 +52,42 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   }
   const handleModifyUsers = () => {
-    setCurrentEmbedID('ManageUser') // Set the state to "ManageUser"
+    setCurrentEmbedID('ManageUser')
   }
 
   return (
-    <div>
-      {/* Logo */}
-      <img
-        src={
-          process.env.NEXT_PUBLIC_LOGO_URL ||
-          'https://www.modocorp.co/images/modocorp.png'
-        }
-        alt="Modocorp Logo" // Alt text for accessibility
-        className="h-12"
-      />
+    <div className="flex flex-col h-full">
+      {/* G&A Partners Logo */}
+      <div className="flex items-center px-4 py-3">
+        <svg viewBox="0 0 200 50" className="h-10" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="35" fontFamily="Arial, Helvetica, sans-serif" fontSize="28" fontWeight="bold" fill="#C8102E">G&amp;A</text>
+          <text x="76" y="35" fontFamily="Arial, Helvetica, sans-serif" fontSize="15" fontWeight="normal" fill="#555555"> Partners</text>
+        </svg>
+      </div>
 
-      {/* Navigation menu */}
-      <nav className="flex flex-col w-64 bg-[#ededed] h-screen p-4 space-y-2">
+      <nav className="flex flex-col w-64 bg-white h-full p-4 space-y-2 border-r border-ga-gray-light">
         {dashboards.map((dashboard) => (
           <button
             key={dashboard.embedID}
-            onClick={() => setCurrentEmbedID(dashboard.embedID)} // Update the state in Parent
+            onClick={() => setCurrentEmbedID(dashboard.embedID)}
             className={`flex items-center space-x-4 p-3 rounded-lg font-bold transition-colors ${
               currentEmbedID === dashboard.embedID
-                ? 'bg-[#FC8A3E] text-white'
-                : 'bg-[#DCDCDC] text-black'
+                ? 'bg-ga-red text-white'
+                : 'bg-ga-gray-light text-ga-charcoal hover:bg-gray-200'
             }`}
           >
             <span className="font-medium">{dashboard.name}</span>
           </button>
         ))}
 
-        {/* Border Line */}
-        <hr className="border-t border-gray-400 my-8 w-[90%] mx-auto" />
+        <hr className="border-t border-ga-gray-light my-8 w-[90%] mx-auto" />
 
         {viewVisible && (
           <div className="nav-message">
             <div className="accordion">
-              {/* Accordion Header */}
               <div
                 className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${
-                  isOpen ? 'bg-[#FC8A3E] text-white' : 'bg-[#F5F5F5] text-black'
+                  isOpen ? 'bg-ga-red text-white' : 'bg-gray-100 text-ga-charcoal'
                 }`}
                 onClick={toggleAccordion}
               >
@@ -102,8 +95,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <div
                     className={`mr-3 flex items-center justify-center w-8 h-8 rounded-full text-lg font-bold transition-colors ${
                       isOpen
-                        ? 'bg-white text-[#FC8A3E]'
-                        : 'bg-gray-300 text-black'
+                        ? 'bg-white text-ga-red'
+                        : 'bg-gray-300 text-ga-charcoal'
                     }`}
                   >
                     ?
@@ -119,13 +112,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </span>
               </div>
 
-              {/* Accordion Content */}
               {isOpen && (
-                <div className="content bg-white border border-gray-200 rounded-b-lg shadow-md p-4 text-black">
-                  <div className="header mb-2 text-lg font-semibold text-gray-800">
+                <div className="content bg-white border border-gray-200 rounded-b-lg shadow-md p-4 text-ga-charcoal">
+                  <div className="header mb-2 text-lg font-semibold text-ga-charcoal">
                     Details
                   </div>
-                  <ul className="list-disc pl-6 space-y-2">
+                  <ul className="list-disc pl-6 space-y-2 text-sm">
                     <li>
                       This is a view-only experience. End users do not need a
                       Domo account.
@@ -141,7 +133,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <li>
                       <a
                         href="https://developer.domo.com/portal/ed061f0c295c0-embedded-capabilities"
-                        className="text-blue-500 hover:underline"
+                        className="text-ga-red hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -155,12 +147,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         )}
         {editVisible && (
-          <div className="nav-message ">
+          <div className="nav-message">
             <div className="accordion">
-              {/* Accordion Header */}
               <div
                 className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${
-                  isOpen ? 'bg-[#FC8A3E] text-white' : 'bg-[#F5F5F5] text-black'
+                  isOpen ? 'bg-ga-red text-white' : 'bg-gray-100 text-ga-charcoal'
                 }`}
                 onClick={toggleAccordion}
               >
@@ -168,8 +159,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <div
                     className={`mr-3 flex items-center justify-center w-8 h-8 rounded-full text-lg font-bold transition-colors ${
                       isOpen
-                        ? 'bg-white text-[#FC8A3E]'
-                        : 'bg-gray-300 text-black'
+                        ? 'bg-white text-ga-red'
+                        : 'bg-gray-300 text-ga-charcoal'
                     }`}
                   >
                     ?
@@ -185,19 +176,18 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </span>
               </div>
 
-              {/* Accordion Content */}
               {isOpen && (
-                <div className="content bg-white border border-gray-200 rounded-b-lg shadow-md p-4 text-black">
-                  <div className="header mb-2 text-lg font-semibold text-gray-800">
+                <div className="content bg-white border border-gray-200 rounded-b-lg shadow-md p-4 text-ga-charcoal">
+                  <div className="header mb-2 text-lg font-semibold text-ga-charcoal">
                     Details
                   </div>
-                  <ul className="list-disc pl-6 space-y-2">
+                  <ul className="list-disc pl-6 space-y-2 text-sm">
                     <li>
                       Each customer is provided with a subscriber instance.
                     </li>
                     <li>Authentication is managed using a JWT token.</li>
                     <li>
-                      Domo's identity broker maps the individual to that
+                      Domo&apos;s identity broker maps the individual to that
                       instance.
                     </li>
                     <li>
@@ -207,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <li>
                       <a
                         href="https://developer.domo.com/portal/ed061f0c295c0-embedded-capabilities"
-                        className="text-blue-500 hover:underline"
+                        className="text-ga-red hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -222,14 +212,13 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
         <button
           onClick={handleModifyUsers}
-          className="mt-auto mb-10 bg-[#FC8A3E] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#e6782e] transition-transform absolute bottom-16 left-1 w-64 p-4 space-y-2"
+          className="mt-auto mb-10 bg-ga-red text-white py-2 px-4 rounded-lg font-bold hover:bg-ga-red-dark transition-colors absolute bottom-16 left-1 w-64 p-4 space-y-2"
         >
           Manage Users
         </button>
-        {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="mt-auto mb-10 bg-[#FC8A3E] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#e6782e] transition-transform absolute bottom-3 left-1 w-64 p-4 space-y-2"
+          className="mt-auto mb-10 bg-ga-charcoal text-white py-2 px-4 rounded-lg font-bold hover:bg-gray-700 transition-colors absolute bottom-3 left-1 w-64 p-4 space-y-2"
         >
           Logout
         </button>

@@ -293,14 +293,14 @@ const ManageUsers = () => {
 
   return (
     // Main container with padding, background color, height, and width
-    <div className="p-8 bg-[#F9F9F9] h-dvh pb-20 w-full">
+    <div className="p-8 bg-[#F4F4F4] h-dvh pb-20 w-full">
       {/* Title */}
-      <h1 className="text-4xl font-semibold mb-6 text-gray-900">Users List</h1>
+      <h1 className="text-4xl font-semibold mb-6 text-ga-charcoal">Users List</h1>
 
       {/* Button to trigger user creation */}
       <button
-        onClick={handleAddUser} // Handle user creation
-        className="bg-blue-500 text-white py-2 px-6 rounded-full shadow-md mb-6 hover:bg-blue-600 transition-colors"
+        onClick={handleAddUser}
+        className="bg-ga-red text-white py-2 px-6 rounded-full shadow-md mb-6 hover:bg-ga-red-dark transition-colors"
       >
         Create User
       </button>
@@ -314,25 +314,24 @@ const ManageUsers = () => {
           >
             <div className="flex flex-col space-y-2">
               {/* Displaying user information */}
-              <div className="text-xl font-semibold text-black">
+              <div className="text-xl font-semibold text-ga-charcoal">
                 {user.username}
               </div>
-              <div className="text-sm text-gray-600">{user.email}</div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-ga-gray-dark">{user.email}</div>
+              <div className="text-sm text-ga-gray-dark">
                 Mapping Value: {user.mappingValue}
               </div>
 
-              {/* Buttons for editing and deleting a user */}
               <div className="flex space-x-4 mt-2">
                 <button
-                  className="text-blue-500 hover:text-blue-700 transition-colors"
-                  onClick={() => handleEditMode(user)} // Handle editing user
+                  className="text-ga-red hover:text-ga-red-dark transition-colors"
+                  onClick={() => handleEditMode(user)}
                 >
                   Edit
                 </button>
                 <button
                   className="text-red-500 hover:text-red-700 transition-colors"
-                  onClick={() => handleDeleteClick(user.id)} // Handle user deletion
+                  onClick={() => handleDeleteClick(user.id)}
                 >
                   Delete
                 </button>
@@ -374,13 +373,13 @@ const ManageUsers = () => {
       {(editingUserId || createMode) && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-lg shadow-xl w-[50%] max-h-[80vh] overflow-y-auto flex flex-col">
-            <h2 className="text-3xl font-semibold mb-6 text-gray-800">
+            <h2 className="text-3xl font-semibold mb-6 text-ga-charcoal">
               {createMode ? 'Create User' : 'Edit User'}
             </h2>
 
             {/* Input fields for editing/creating user */}
             <div className="mb-6">
-              <label className="block text-lg font-medium mb-2 text-gray-600">
+              <label className="block text-lg font-medium mb-2 text-ga-gray-dark">
                 Username
               </label>
               <input
@@ -392,31 +391,31 @@ const ManageUsers = () => {
                     username: e.target.value, // Update username on change
                   })
                 }
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
               />
             </div>
             <div className="mb-6">
-              <label className="block text-lg font-medium mb-2 text-gray-600">
+              <label className="block text-lg font-medium mb-2 text-ga-gray-dark">
                 Email
               </label>
               <input
                 type="email"
-                value={editUserData.email} // Controlled input for email
+                value={editUserData.email}
                 onChange={(e) =>
                   setEditUserData({
                     ...editUserData,
-                    email: e.target.value, // Update email on change
+                    email: e.target.value,
                   })
                 }
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
               />
             </div>
 
             {/* Input for mapping value */}
             <div className="mb-6">
-              <label className="block text-lg font-medium mb-2 text-gray-600">
+              <label className="block text-lg font-medium mb-2 text-ga-gray-dark">
                 Mapping Value
-                <span className="ml-2 text-blue-500 cursor-pointer bg-gray-200 rounded-full p-1 relative group">
+                <span className="ml-2 text-ga-red cursor-pointer bg-gray-200 rounded-full p-1 relative group">
                   ?
                   <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-2 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
                     This is the mapping attribute for what instance the user is
@@ -441,13 +440,13 @@ const ManageUsers = () => {
                     mappingValue: e.target.value, // Update mapping value on change
                   })
                 }
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
               />
             </div>
 
             {/* Input for password */}
             <div className="mb-6">
-              <label className="block text-lg font-medium mb-2 text-gray-600">
+              <label className="block text-lg font-medium mb-2 text-ga-gray-dark">
                 Password
               </label>
               <input
@@ -462,7 +461,7 @@ const ManageUsers = () => {
                   })
                 }}
                 placeholder="Enter password"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
               />
             </div>
 
@@ -487,7 +486,7 @@ const ManageUsers = () => {
                         (e) =>
                           handleDashboardChange(index, 'name', e.target.value) // Update dashboard name on change
                       }
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
                     />
                   </div>
 
@@ -507,7 +506,7 @@ const ManageUsers = () => {
                             e.target.value
                           ) // Update embed ID on change
                       }
-                      className="ml-4 w-[60%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                      className="ml-4 w-[60%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
                     />
                   </div>
 
@@ -532,7 +531,7 @@ const ManageUsers = () => {
                                 e.target.value
                               ) // Update column filter on change
                           }
-                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
                         />
                         <select
                           value={filter.operator} // Controlled select for operator filter
@@ -545,7 +544,7 @@ const ManageUsers = () => {
                                 e.target.value
                               ) // Update operator filter on change
                           }
-                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
                         >
                           {operatorOptions.map((operator) => (
                             <option key={operator} value={operator}>
@@ -566,7 +565,7 @@ const ManageUsers = () => {
                                 e.target.value
                               ) // Update filter values on change
                           }
-                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                          className="w-[30%] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ga-red text-black"
                         />
                         <button
                           onClick={() => handleRemoveFilter(index, filterIndex)} // Remove filter
@@ -578,7 +577,7 @@ const ManageUsers = () => {
                     ))}
                     <button
                       onClick={() => handleAddFilter(index)} // Add new filter
-                      className="bg-blue-500 text-white py-2 px-4 rounded-full mt-4 hover:bg-blue-600 transition-colors"
+                      className="bg-ga-red text-white py-2 px-4 rounded-full mt-4 hover:bg-ga-red-dark transition-colors"
                     >
                       Add Filter
                     </button>
@@ -600,7 +599,7 @@ const ManageUsers = () => {
             {/* Button to add new dashboard */}
             <button
               onClick={handleAddDashboard} // Handle adding new dashboard
-              className="bg-blue-500 text-white py-2 px-4 rounded-full mt-4 hover:bg-blue-600 transition-colors"
+              className="bg-ga-red text-white py-2 px-4 rounded-full mt-4 hover:bg-ga-red-dark transition-colors"
             >
               Add Dashboard
             </button>
@@ -615,7 +614,7 @@ const ManageUsers = () => {
               </button>
               <button
                 onClick={createMode ? handleCreateUser : handleUpdateUser} // Handle user creation or update
-                className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition-colors"
+                className="bg-ga-red text-white py-2 px-6 rounded-full hover:bg-ga-red-dark transition-colors"
               >
                 {createMode ? 'Create' : 'Save'}{' '}
                 {/* Show appropriate button text */}
