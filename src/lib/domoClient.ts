@@ -77,7 +77,8 @@ export const useDomoClient = () => {
 
         if (event.data.error) {
           console.error(
-            `received rpc error message with referenceId = ${referenceId}`,
+            'received rpc error message with referenceId =',
+            referenceId,
             event.data.error
           )
         }
