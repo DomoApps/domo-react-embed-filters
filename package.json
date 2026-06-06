@@ -27,7 +27,7 @@
     "react-dom": "^19.2.1",
     "run-all": "^1.0.1",
     "tailwindcss": "^3.4.17",
-    "uuid": "^11.1.1"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
