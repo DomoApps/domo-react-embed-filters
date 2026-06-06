@@ -2,7 +2,6 @@
 
 // Import required dependencies
 import React, { useState, useEffect } from 'react'
-import { omit } from 'lodash' // Import Lodash's omit function for object manipulation
 
 // Define the Filter interface to structure dashboard filters
 interface Filter {
@@ -104,7 +103,7 @@ const ManageUsers = () => {
     setEditingUserId(user.id)
 
     // Remove the password field from the user object before editing
-    const userWithoutPassword = omit(user, 'password')
+    const { password, ...userWithoutPassword } = user
     setOriginalUserData({ ...userWithoutPassword }) // Store the original data
     setEditUserData({ ...userWithoutPassword }) // Set the data for editing
   }
